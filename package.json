@@ -1,0 +1,31 @@
+{
+  "name": "git-extractor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "start": "node index",
+    "build": "pkg ."
+  },
+  "keywords": [
+    "git",
+    "commit",
+    "diff"
+  ],
+  "author": "taek",
+  "license": "ISC",
+  "dependencies": {
+    "archiver": "^4.0.1",
+    "chalk": "^4.1.0",
+    "clipboardy": "^2.3.0",
+    "dateformat": "^3.0.3",
+    "del": "^5.1.0",
+    "glob": "^7.1.6",
+    "inquirer": "^7.2.0",
+    "node-cmd-promise": "^1.0.0",
+    "open": "^7.0.4",
+    "open-file-explorer": "^1.0.2",
+    "pkg": "^4.4.8"
+  }
+}

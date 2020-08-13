@@ -21,5 +21,7 @@ exports.writeWikiInfo = async () => {
 };
 
 exports.getWikiURL = async () => {
-  return await read(wikiURLPath);
+  const wiki = await read(wikiURLPath);
+
+  return JSON.parse(wiki);
 };

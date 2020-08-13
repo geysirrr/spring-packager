@@ -1,11 +1,12 @@
 const cmd = require('node-cmd-promise');
 const { execDirPath } = require('./paths');
+const { ENV } = require('./config');
 
-const goToExecDirPath = `cd ${execDirPath} && `;
+const goToExecDirPath = ENV === 'production' ? `cd ${execDirPath} && ` : '';
 
 exports.getCommitFilePaths = async (start, end) => {
   const { stdout } = await cmd(
-    `${goToExecDirPath} git diff-tree --no-commit-id --name-only -r ${start}~ ${end}`
+    `${goToExecDirPath}git diff-tree --no-commit-id --name-only -r ${start}~ ${end}`
   );
 
   return stdout;
@@ -13,7 +14,7 @@ exports.getCommitFilePaths = async (start, end) => {
 
 exports.getFirstCommitMessage = async id => {
   const { stdout } = await cmd(
-    `${goToExecDirPath} git log -n 1 --pretty=format:%s ${id}`
+    `${goToExecDirPath}git log -n 1 --pretty=format:%s ${id}`
   );
 
   return stdout;
@@ -21,7 +22,7 @@ exports.getFirstCommitMessage = async id => {
 
 exports.getCommitMessages = async (start, end) => {
   const { stdout } = await cmd(
-    `${goToExecDirPath} git log ${start}..${end} --oneline`
+    `${goToExecDirPath}git log ${start}..${end} --oneline`
   );
 
   return stdout;

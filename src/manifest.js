@@ -2,9 +2,8 @@ const os = require('os');
 const dateFormat = require('dateformat');
 const { manifestFileDirectory, manifestFilePath } = require('./paths');
 const { canAcessFile, read, write, mkdir } = require('./utils');
-const { PROJECT_NAME } = require('./constants');
+const { PROJECT_NAME } = require('./config');
 
-const PROJECT_NAME = PROJECT_NAME;
 const USER_ID = 'cubuild';
 
 const DEFAULT_CONTENTS = [

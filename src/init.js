@@ -27,10 +27,11 @@ const { makeZip } = require('./zips');
 const { openChrome, openRootDirectory } = require('./opens');
 const { writeJiraInfo } = require('./jira');
 const { writeWikiInfo } = require('./wiki');
+const { handleError } = require('./errors');
 
 exports.init = async () => {
   try {
-    // await del(rootUploadDirectory, { force: true });
+    await del(rootUploadDirectory, { force: true });
     await writeWikiInfo();
 
     const { patchVersion, start, end } = await getOptionsByPrompt();
@@ -78,8 +79,8 @@ exports.init = async () => {
     await writeJiraInfo(`${firstCommitMessage}\n${commitMessages}`);
 
     openRootDirectory();
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    handleError(err);
   } finally {
     await endByPrompt();
   }

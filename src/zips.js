@@ -2,7 +2,7 @@ const fs = require('fs');
 const os = require('os');
 const archiver = require('archiver');
 const { rootUploadDirectory } = require('./paths');
-const { PROJECT_NAME } = require('./constants');
+const { PROJECT_NAME } = require('./config');
 
 exports.makeZip = patchVersion => {
   return new Promise((resolve, reject) => {

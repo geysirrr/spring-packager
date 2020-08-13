@@ -34,8 +34,6 @@ exports.init = async () => {
     await del(rootUploadDirectory, { force: true });
     await writeWikiInfo();
 
-    await openChrome();
-
     const { patchVersion, start, end } = await getOptionsByPrompt();
     const commitFilePaths = await getCommitFilePaths(start, end);
     const commitFileTargetPaths = changeCommitFileToTargetPath(commitFilePaths);
@@ -72,6 +70,7 @@ exports.init = async () => {
 
     await makeManifest(patchVersion);
     await makeZip(patchVersion);
+    await openChrome();
 
     // git log command doesn't show up start commit information
     // so needed to log start commit message separately.

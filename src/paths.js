@@ -8,6 +8,8 @@ const warWebInfDirectory = path.join(rootUploadDirectory, 'WEB-INF');
 
 const manifestFileDirectory = `${path.join(rootUploadDirectory, 'META-INF')}`;
 
+const isWebInfFile = splitFilePathByWebInf => splitFilePathByWebInf.length > 1;
+
 exports.execDirPath = execDirPath;
 
 exports.rootUploadDirectory = rootUploadDirectory;
@@ -29,8 +31,13 @@ exports.changeCommitFileToTargetPath = commitFilePaths =>
 exports.getWarClassFilePath = file =>
   file.replace(/target\/classes/g, 'classes');
 
-exports.getWarWebContentFilePath = file =>
-  file.replace(/WebContent\/WEB-INF/g, '');
+exports.getWarWebContentFilePath = file => {
+  const splitFilePathByWebInf = file.split('WEB-INF/');
+
+  return isWebInfFile(splitFilePathByWebInf)
+    ? file.replace(new RegExp(`${splitFilePathByWebInf[0]}WEB-INF`, 'g'), '')
+    : file;
+};
 
 exports.getCombinedTargetPathAndWarPath = (targetPaths, warPaths) =>
   [...Array(targetPaths.length)].reduce(
